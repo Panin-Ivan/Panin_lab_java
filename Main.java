@@ -57,10 +57,10 @@ public class Main {
                                 break;
                             case 4: if (producers_cntr>0){
                                 for(int i=0; i<producers_cntr;i++)
-                            {
-                                System.out.print(i+1+"|");
-                                producers[i].outProducer();
-                            }
+                                {
+                                    System.out.print(i+1+"|");
+                                    producers[i].outProducer();
+                                }
 
                                 System.out.print("Выберите производителеля ");
                                 do
@@ -70,9 +70,9 @@ public class Main {
                                         System.out.println("Ошибка. Введите производителеля.");
                                 } while (selection < 1 || selection > producers_cntr);
 
-                            products[products_cntr] = new Product();
-                            products[products_cntr].inProduct(producers[selection-1]);
-                            products_cntr += 1;
+                                products[products_cntr] = new Product();
+                                products[products_cntr].inProduct(producers[selection-1]);
+                                products_cntr += 1;
 
                             } else { System.out.println("Нет производителей");} break;
                             case 5:if (sellers_cntr != 0 && products_cntr != 0 && buyers_cntr !=0) {
@@ -110,7 +110,7 @@ public class Main {
                                 for(int i=0; i<buyers_cntr;i++)
                                 {
                                     System.out.print(i+1+"|");
-                                    sellers[i].outSeller();
+                                    buyers[i].outBuyer();
                                 }
                                 System.out.print("Выберите покупателя ");
                                 do
@@ -200,7 +200,7 @@ public class Main {
                                 System.out.println("Ошибка. Введите номер заказа.");
                         } while (selection < 1 || selection > orders_cntr);
 
-                        orders[selection].sum();
+                        orders[selection-1].sum();
 
                     }else System.out.println("Нет заказов"); break;
                 case 4:
@@ -217,10 +217,13 @@ public class Main {
                                 System.out.println("Ошибка. Введите номер заказа.");
                         } while (selection < 1 || selection > orders_cntr);
 
-                        orders[selection].setStatus(true);
+                        if(!orders[selection-1].getStatus()){   //проверка статуса
+                            orders[selection-1].setStatus(true);
 
-                        orders_complete.add(orders[selection]);
-                        orders_complete_cntr += 1;
+                            orders_complete.add(orders[selection-1]);
+                            orders_complete_cntr += 1;
+
+                        }else {System.out.println("Заказ уже выполнен");}
                     }else System.out.println("Нет заказов"); break;
                 case 5:if(sellers_cntr>0) {
                     for (int i = 0; i < sellers_cntr; i++) {
@@ -229,21 +232,21 @@ public class Main {
                     }
                 }else System.out.println("Нет продавцов");
 
-                System.out.print("Выберите номер продавца для увольнения ");
-                do
-                {
-                    selection = scanner.nextInt();
-                    if (selection < 1 || selection > sellers_cntr)
-                        System.out.println("Ошибка. Введите номер продавца.");
-                } while (selection < 1 || selection > sellers_cntr);
+                    System.out.print("Выберите номер продавца для увольнения ");
+                    do
+                    {
+                        selection = scanner.nextInt();
+                        if (selection < 1 || selection > sellers_cntr)
+                            System.out.println("Ошибка. Введите номер продавца.");
+                    } while (selection < 1 || selection > sellers_cntr);
 
-                sellers_dismissed.add(sellers[selection]);
-                sellers_dismissed_cntr += 1;
+                    sellers_dismissed.add(sellers[selection-1]);
+                    sellers_dismissed_cntr += 1;
 
-                sellers_cntr -= 1;
-                for (int i =selection-1; i<sellers_cntr;i++){
-                    sellers[i]=sellers[i+1];
-                }
+                    sellers_cntr -= 1;
+                    for (int i =selection-1; i<sellers_cntr;i++){
+                        sellers[i]=sellers[i+1];
+                    }
                     break;
                 case 6: exit = false; break;
             }

@@ -56,12 +56,11 @@ public class Order extends Product {
         Scanner scanner = new Scanner(System.in);
         int qua;
 
-        System.out.print("Введите id: ");
-        setId(scanner.nextInt());
-
         System.out.print("Введите дату: ");
         setDate(scanner.nextLine());
 
+        System.out.print("Введите id: ");
+        setId(scanner.nextInt());
 
         System.out.print("Введите кол-во: ");
         do {
