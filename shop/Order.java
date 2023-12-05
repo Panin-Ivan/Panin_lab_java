@@ -67,7 +67,7 @@ public class Order extends Product {
             qua = scanner.nextInt();
             if (qua > getQuantity()) System.out.println("Столько товара нет на складе, введите меньшее число");
         } while (qua > getQuantity());
-        setQuantityOrder(scanner.nextInt());
+        setQuantityOrder(qua);
 
         status = false;
     }
