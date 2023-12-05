@@ -13,7 +13,7 @@ public class Producer extends Human {
 
     // Метод вывода информации о производителе
     public void outProducer(){
-        System.out.print("Производитель: " + getName() + "  Телефон: " +getPhone());}
+        System.out.println("Производитель: " + getName() + "  Телефон: " +getPhone());}
 
     // Метод ввода информации о производителе
     public void inProducer() {

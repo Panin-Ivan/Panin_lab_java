@@ -22,6 +22,6 @@ public class Buyer extends Human {
 
     // Метод вывода информации о покупателе
     public void outBuyer() {
-        System.out.println("Покупатель:" + getName() + "  Телефон: " + getPhone());
+        System.out.println("Покупатель: " + getName() + "  Телефон: " + getPhone());
     }
 }

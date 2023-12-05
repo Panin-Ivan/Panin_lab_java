@@ -35,7 +35,7 @@ public class Order extends Product {
     public String getName_seller() {return name_seller;}
 
     public void outOrder() {       //Вывод заказа
-        System.out.println("id:"+id + "  Дата:" + date + "  Кол-во:" + quantityOrder + "  Статус заказа:" + status);
+        System.out.println("id:"+id + "  Дата:" + date + "  Кол-во:" + quantityOrder + "  Статус заказа:" + status +"  Покупатель:"+ name_buyer +"  Продавец:" +name_seller);
     }
 
     //Добавление заказа по частям
@@ -77,7 +77,7 @@ public class Order extends Product {
     public void sum() {
         int sum;
         sum = quantityOrder * this.getPrice();
-        System.out.println("Сумма заказа id"+id+" : " + sum);
+        System.out.println("Сумма заказа id"+id+": " + sum);
     }
 
 }

@@ -54,6 +54,6 @@ public class Product extends Producer {
     }
 
     public void outProduct(){
-        System.out.println("Наименование: "+ getName_Product()+"  Цена: "+getPrice() +"  Кол-во: "+getQuantity()+ "  Имя производителя: " +getName() + "  Телефон:"+getPhone());
+        System.out.println("Наименование: "+ getName_Product()+"  Цена: "+getPrice() +"  Кол-во: "+getQuantity()+ "  Имя производителя: " +getName() + "  Телефон: "+getPhone());
     }
 }
