@@ -1,15 +1,18 @@
 package shop;
 
-import shop.Human;
-
 import java.util.Scanner;
 
 public class Producer extends Human {
-    public Producer(){ };// Конструктор без параметров
+    static int producers_cntr = 0;   //счетчик
+
+    public Producer(){ producers_cntr += 1; };// Конструктор без параметров
 
     public Producer(String name, String phone) {    //С параметрами
         super(name, phone);
+        producers_cntr += 1;
     }
+
+    public static int getProducer_cntr(){return producers_cntr;}   //получение счетчика
 
     // Метод вывода информации о производителе
     public void outProducer(){

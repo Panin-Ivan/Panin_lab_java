@@ -3,11 +3,15 @@ package shop;
 import java.util.Scanner;
 
 public class Buyer extends Human {
-    public Buyer(){ };  // Конструктор без параметров
+    static int buyers_cntr = 0;   //счетчик
+    public Buyer(){ buyers_cntr += 1;};  // Конструктор без параметров
 
     public Buyer(String name, String phone){     //с параметрами
         super(name,phone);
+        buyers_cntr += 1;
     }
+
+    public static int getBuyers_cntr(){return buyers_cntr;};   //счетчик
 
     // Метод ввода информации о покупателе
     public void inBuyer() {

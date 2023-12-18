@@ -6,10 +6,12 @@ public class Product extends Producer {
     private String Name_Product; // Наименование товара
     private int price; // Цена товара
     private int quantity; // Кол-во товара
+    static int products_cntr = 0;  //счетчик
 
     public String getName_Product(){return Name_Product;}
     public int getPrice(){return price;}
     public int getQuantity(){return quantity;}
+    public static int getProducts_cntr(){return products_cntr;}   //получение счетчика
 
     public void setName_Product(String Name_Product){ this.Name_Product=Name_Product;}
     public void setPrice(int price){ this.price=price;}
@@ -20,6 +22,7 @@ public class Product extends Producer {
         this.Name_Product = "product_name";
         this.price = 0;
         this.quantity = 0;
+        products_cntr += 1;
     };
 
     //с параметрами
@@ -28,6 +31,7 @@ public class Product extends Producer {
         this.Name_Product = Name_product;
         this.price = price;
         this.quantity = quantity;
+        products_cntr += 1;
     }
 
     public Product(Product product){
@@ -35,6 +39,7 @@ public class Product extends Producer {
         this.Name_Product = product.getName_Product();
         this.price = getPrice();
         this.quantity = getQuantity();
+        products_cntr += 1;
     }
 
     public void inProduct(Producer producer){

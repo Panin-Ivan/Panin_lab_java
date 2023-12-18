@@ -9,6 +9,7 @@ public class Order extends Product {
     private boolean status;         //статус заказа
     private String name_buyer;      //имя покупателя
     private String name_seller;     //имя продавца
+    static int orders_cntr = 0;     //счетчик
 
     public Order(){         // Пустой конструктор
         id = 0;
@@ -17,6 +18,7 @@ public class Order extends Product {
         status = false;
         name_buyer = "name_buyer";
         name_seller = "name_seller";
+        orders_cntr += 1;
     }
 
     //Сетеры
@@ -33,6 +35,7 @@ public class Order extends Product {
     public boolean getStatus() {return status;}
     public String getName_buyer() {return name_buyer;}
     public String getName_seller() {return name_seller;}
+    public static int getOrders_cntr(){ return orders_cntr;}
 
     public void outOrder() {       //Вывод заказа
         System.out.println("id:"+id + "  Дата:" + date + "  Кол-во:" + quantityOrder + "  Статус заказа:" + status +"  Покупатель:"+ name_buyer +"  Продавец:" +name_seller);
