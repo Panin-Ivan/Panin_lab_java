@@ -2,27 +2,35 @@ import shop.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
-class Input{        //ввод пункта из списка
-    static int inInt(int lower_limit, int upper_limit){
-        Scanner scanner = new Scanner(System.in);
-        int selection;
-        do
-        {
-            selection = scanner.nextInt();
-            if (selection < lower_limit || selection > upper_limit)
-                System.out.println("Ошибка. Введите пункт списка.");
-        } while (selection < lower_limit || selection > upper_limit);
-        return selection;
-    }
-}
 
 public class Main {
+    static class Input{        //ввод пункта из списка
+        static int inInt(int lower_limit, int upper_limit) {
+            Scanner scanner = new Scanner(System.in);
+            int selection;
+            try {       // Исключение, если вводится не число
+                do {
+                    selection = scanner.nextInt();
+                    if (selection < lower_limit || selection > upper_limit) {
+                        System.out.println("Ошибка. Введите пункт списка.");
+                    }
+                } while (selection < lower_limit || selection > upper_limit);
+            }catch(InputMismatchException e){
+                selection =-1;
+                System.out.println("Ошибка. Введите число.");
+                return selection;
+            }
+                return selection;
+        }
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Producer[] producers = new Producer[10];
         Seller[] sellers = new Seller[10];
-        Buyer[] buyers = new Buyer[10];
+        Buyer[][] buyers = new Buyer[2][5];
         Product[] products = new Product[10];
         Order[] orders = new Order[10];
         ArrayList<Order> orders_complete = new ArrayList<Order>(); int orders_complete_cntr = 0;
@@ -34,9 +42,11 @@ public class Main {
         {
             System.out.println("1.Добавление\n2.Вывод\n3.Сумма заказа\n4.Выполнить заказ\n5.Уволить продавца\n6.Выход");
 
-            selection = Input.inInt(1, 6);
+            do {
+                selection = Input.inInt(1, 6);
+            }while(selection<0);
 
-            boolean exit1;
+            boolean exit1; int j,k;
             switch (selection)
             {
                 case 1:
@@ -45,7 +55,9 @@ public class Main {
                         System.out.println("1.Добавление производителя \n2.Добавление продавца\n3.Добавление покупателя\n4.Добавление товара\n5.Добавление заказа\n6.Выход к прошлому меню");
                         System.out.print("Выберете дальнейшее действие: ");
 
+                        do{
                         selection = Input.inInt(1, 6);
+                        }while(selection<0);
 
                         switch (selection) {
                             case 1:
@@ -57,8 +69,10 @@ public class Main {
                                 sellers[Seller.getSellers_Cntr()-1].inSeller();
                                 break;
                             case 3:
-                                buyers[Buyer.getBuyers_cntr()] = new Buyer();
-                                buyers[Buyer.getBuyers_cntr()-1].inBuyer();
+                                j = Buyer.getBuyers_cntr()/5;
+                                k = Buyer.getBuyers_cntr()%5;
+                                buyers[j][k] = new Buyer();
+                                buyers[j][k].inBuyer();
                                 break;
                             case 4: if (Producer.getProducer_cntr()>0){
                                 for(int i=0; i<Producer.getProducer_cntr();i++)
@@ -68,7 +82,9 @@ public class Main {
                                 }
 
                                 System.out.print("Выберите производителеля ");
+                                do{
                                 selection = Input.inInt(1, Producer.getProducer_cntr());
+                                }while(selection<0);
 
                                 products[Product.getProducts_cntr()] = new Product();
                                 products[Product.getProducts_cntr()-1].inProduct(producers[selection-1]);
@@ -84,7 +100,9 @@ public class Main {
                                     products[i].outProduct();
                                 }
                                 System.out.print("Выберите продукт ");
+                                do{
                                 selection = Input.inInt(1, Producer.getProducer_cntr());
+                                }while(selection<0);
 
                                 orders[Order.getOrders_cntr()-1].inOrder(products[selection-1]);
 
@@ -94,19 +112,26 @@ public class Main {
                                     sellers[i].outSeller();
                                 }
                                 System.out.print("Выберите продавца ");
+                                do{
                                 selection = Input.inInt(1, Seller.getSellers_Cntr());
+                                }while(selection<0);
 
                                 orders[Order.getOrders_cntr()-1].inOrder(sellers[selection-1]);
 
-                                for(int i=0; i<Buyer.getBuyers_cntr();i++)
-                                {
-                                    System.out.print(i+1+"|");
-                                    buyers[i].outBuyer();
+                                for(int i=0; i<Buyer.getBuyers_cntr();i++) {
+                                    j = i/5;
+                                    k = i%5;
+                                    System.out.print(i + 1 + "|");
+                                    buyers[j][k].outBuyer();
                                 }
                                 System.out.print("Выберите покупателя ");
+                                do{
                                 selection = Input.inInt(1, Buyer.getBuyers_cntr());
+                                }while(selection<0);
 
-                                orders[Order.getOrders_cntr()-1].inOrder(buyers[selection-1]);
+                                j = (selection-1)/5;
+                                k = (selection-1)%5;
+                                orders[Order.getOrders_cntr()-1].inOrder(buyers[j][k]);
 
                                 orders[Order.getOrders_cntr()-1].inOrder();
 
@@ -120,7 +145,9 @@ public class Main {
                         exit1 = true;
                         System.out.println("1.Вывод производителя \n2.Вывод продавца\n3.Вывод покупателя\n4.Вывод товара\n5.Вывод заказа\n6.Вывод выполненных заказов\n7.Вывод уволенных продавцов\n8.Выход к прошлому меню");
                         System.out.print("Выберете дальнейшее действие: ");
+                        do{
                         selection = Input.inInt(1, 8);
+                        }while(selection<0);
 
                         switch (selection) {
                             case 1: if(Producer.getProducer_cntr()>0) {
@@ -136,10 +163,12 @@ public class Main {
                                 }
                             }else System.out.println("Нет продавцов"); break;
                             case 3: if(Buyer.getBuyers_cntr()>0) {
-                                for (int i = 0; i < Buyer.getBuyers_cntr(); i++) {
-                                    System.out.print(i+1 + "|");
-                                    buyers[i].outBuyer();
-                                }
+                                    for(int i=0; i<Buyer.getBuyers_cntr();i++) {
+                                        j = i/5;
+                                        k = i%5;
+                                        System.out.print(i + 1 + "|");
+                                        buyers[j][k].outBuyer();
+                                    }
                             }else System.out.println("Нет покупателей"); break;
                             case 4: if(Product.getProducts_cntr()>0) {
                                 for (int i = 0; i < Product.getProducts_cntr(); i++) {
@@ -176,7 +205,9 @@ public class Main {
                             orders[i].outOrder();
                         }
                         System.out.print("Выберите номер заказа для посчета суммы ");
+                        do{
                         selection = Input.inInt(1, Order.getOrders_cntr());
+                        }while(selection<0);
 
                         orders[selection-1].sum();
 
@@ -188,7 +219,9 @@ public class Main {
                             orders[i].outOrder();
                         }
                         System.out.print("Выберите номер заказа для выполнения ");
+                        do{
                         selection = Input.inInt(1, Order.getOrders_cntr());
+                        }while(selection<0);
 
                         if(!orders[selection-1].getStatus()){   //проверка статуса
                             orders[selection-1].setStatus(true);
@@ -206,7 +239,9 @@ public class Main {
                 }else System.out.println("Нет продавцов");
 
                     System.out.print("Выберите номер продавца для увольнения ");
+                    do{
                     selection = Input.inInt(1, Seller.getSellers_Cntr());
+                    }while(selection<0);
 
                     sellers_dismissed.add(sellers[selection-1]);
                     sellers_dismissed_cntr += 1;
