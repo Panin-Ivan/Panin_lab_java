@@ -2,7 +2,8 @@ package shop;
 
 import java.util.Scanner;
 
-public class Product extends Producer {
+public class Product {
+    private Producer producer;  //производитель
     private String Name_Product; // Наименование товара
     private int price; // Цена товара
     private int quantity; // Кол-во товара
@@ -12,6 +13,7 @@ public class Product extends Producer {
     public int getPrice(){return price;}
     public int getQuantity(){return quantity;}
     public static int getProducts_cntr(){return products_cntr;}   //получение счетчика
+    public Producer getProducer(){return producer;}
 
     public void setName_Product(String Name_Product){ this.Name_Product=Name_Product;}
     public void setPrice(int price){ this.price=price;}
@@ -27,7 +29,8 @@ public class Product extends Producer {
 
     //с параметрами
     public Product(String name, String phone, String Name_product, int price, int quantity){
-        super(name, phone);
+        this.producer.setName(name);
+        this.producer.setName(phone);
         this.Name_Product = Name_product;
         this.price = price;
         this.quantity = quantity;
@@ -35,7 +38,8 @@ public class Product extends Producer {
     }
 
     public Product(Product product){
-        super(product.getName(), product.getPhone());
+        this.producer.setName(product.producer.getName());
+        this.producer.setPhone(product.producer.getPhone());
         this.Name_Product = product.getName_Product();
         this.price = getPrice();
         this.quantity = getQuantity();
@@ -43,8 +47,8 @@ public class Product extends Producer {
     }
 
     public void inProduct(Producer producer){
-        this.setName(producer.getName());
-        this.setPhone(producer.getPhone());
+        this.producer.setName(producer.getName());
+        this.producer.setPhone(producer.getPhone());
 
         Scanner scanner = new Scanner(System.in);
 
@@ -59,6 +63,6 @@ public class Product extends Producer {
     }
 
     public void outProduct(){
-        System.out.println("Наименование: "+ getName_Product()+"  Цена: "+getPrice() +"  Кол-во: "+getQuantity()+ "  Имя производителя: " +getName() + "  Телефон: "+getPhone());
+        System.out.println("Наименование: "+ getName_Product()+"  Цена: "+getPrice() +"  Кол-во: "+getQuantity()+ "  Имя производителя: " +this.producer.getName() + "  Телефон: "+this.producer.getPhone());
     }
 }

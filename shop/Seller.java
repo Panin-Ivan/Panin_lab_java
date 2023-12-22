@@ -5,16 +5,19 @@ import java.util.Scanner;
 public class Seller extends Human {
     private int salary; // Зарплата
     static int sellers_cntr = 0;    //Счетчик
+    private int id_seller;
 
     public Seller(){       // Конструктор без параметров
         salary = 0;
         sellers_cntr+=1;
+        id_seller = sellers_cntr;
     };
 
     public Seller(String name, String phone, int salary) {    //С параметрами
         super(name, phone);
         this.salary = salary;
         sellers_cntr+=1;
+        id_seller = sellers_cntr;
     }
     //Методы получения/установления зарплаты
     public int getSalary() {       // Метод для получения информации о зарплате
@@ -25,8 +28,7 @@ public class Seller extends Human {
         this.salary = salary;
     }
 
-    public static int getSellers_Cntr(){return sellers_cntr;}   //получение счетчика
-    public static void fire(){sellers_cntr-=1;}     //изм-е счетчика при увольнении
+    public int getId_seller(){ return id_seller;}
 
     public Seller(Seller seller){
         super(seller.getName(), seller.getPhone());
@@ -35,7 +37,7 @@ public class Seller extends Human {
 
     // Метод вывода информации о сотруднике
     public void outSeller(){
-        System.out.println("Продавец: " + getName() + "  Телефон: " +getPhone()+"  Зарплата: "+getSalary());
+        System.out.println("Продавец: " + getName() + "  Телефон: " +getPhone()+"  Зарплата: "+getSalary()+"  id: "+ id_seller);
     }
 
     // Метод ввода информации о сотруднике

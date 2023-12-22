@@ -12,7 +12,7 @@ public class Order extends Product {
     static int orders_cntr = 0;     //счетчик
 
     public Order(){         // Пустой конструктор
-        id = 0;
+        id = orders_cntr+1;
         date = "10.10.2023";
         quantityOrder = 0;
         status = false;
@@ -49,8 +49,8 @@ public class Order extends Product {
         setName_buyer(buyer.getName());
     }
     public void inOrder(Product product){
-        setName(product.getName());
-        setPhone(product.getPhone());
+        this.getProducer().setName(product.getProducer().getName());
+        this.getProducer().setPhone(product.getProducer().getPhone());
         setName_Product(product.getName_Product());
         setQuantity(product.getQuantity());
         setPrice(product.getPrice());
@@ -61,9 +61,6 @@ public class Order extends Product {
 
         System.out.print("Введите дату: ");
         setDate(scanner.nextLine());
-
-        System.out.print("Введите id: ");
-        setId(scanner.nextInt());
 
         System.out.print("Введите кол-во: ");
         do {

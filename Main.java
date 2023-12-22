@@ -29,7 +29,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Producer[] producers = new Producer[10];
-        Seller[] sellers = new Seller[10];
+        Seller[] sellers = new Seller[10]; int sellers_cntr =0;
         Buyer[][] buyers = new Buyer[2][5];
         Product[] products = new Product[10];
         Order[] orders = new Order[10];
@@ -65,8 +65,9 @@ public class Main {
                                 producers[Producer.getProducer_cntr()-1].inProducer();
                                 break;
                             case 2:
-                                sellers[Seller.getSellers_Cntr()] = new Seller();
-                                sellers[Seller.getSellers_Cntr()-1].inSeller();
+                                sellers[sellers_cntr] = new Seller();
+                                sellers[sellers_cntr].inSeller();
+                                sellers_cntr++;
                                 break;
                             case 3:
                                 j = Buyer.getBuyers_cntr()/5;
@@ -90,7 +91,7 @@ public class Main {
                                 products[Product.getProducts_cntr()-1].inProduct(producers[selection-1]);
 
                             } else { System.out.println("Нет производителей");} break;
-                            case 5:if (Seller.getSellers_Cntr() != 0 && Product.getProducts_cntr() != 0 && Buyer.getBuyers_cntr() !=0) {
+                            case 5:if (sellers_cntr != 0 && Product.getProducts_cntr() != 0 && Buyer.getBuyers_cntr() !=0) {
 
                                 orders[Order.getOrders_cntr()] = new Order();
 
@@ -106,14 +107,14 @@ public class Main {
 
                                 orders[Order.getOrders_cntr()-1].inOrder(products[selection-1]);
 
-                                for(int i=0; i<Seller.getSellers_Cntr();i++)
+                                for(int i=0; i<sellers_cntr;i++)
                                 {
                                     System.out.print(i+1+"|");
                                     sellers[i].outSeller();
                                 }
                                 System.out.print("Выберите продавца ");
                                 do{
-                                selection = Input.inInt(1, Seller.getSellers_Cntr());
+                                selection = Input.inInt(1, sellers_cntr);
                                 }while(selection<0);
 
                                 orders[Order.getOrders_cntr()-1].inOrder(sellers[selection-1]);
@@ -156,8 +157,8 @@ public class Main {
                                     producers[i].outProducer();
                                 }
                             }else System.out.println("Нет производителей"); break;
-                            case 2: if(Seller.getSellers_Cntr()>0) {
-                                for (int i = 0; i < Seller.getSellers_Cntr(); i++) {
+                            case 2: if(sellers_cntr>0) {
+                                for (int i = 0; i < sellers_cntr; i++) {
                                     System.out.print(i+1 + "|");
                                     sellers[i].outSeller();
                                 }
@@ -231,8 +232,8 @@ public class Main {
 
                         }else {System.out.println("Заказ уже выполнен");}
                     }else System.out.println("Нет заказов"); break;
-                case 5:if(Seller.getSellers_Cntr()>0) {
-                    for (int i = 0; i < Seller.getSellers_Cntr(); i++) {
+                case 5:if(sellers_cntr>0) {
+                    for (int i = 0; i < sellers_cntr; i++) {
                         System.out.print(i+1 + "|");
                         sellers[i].outSeller();
                     }
@@ -240,16 +241,20 @@ public class Main {
 
                     System.out.print("Выберите номер продавца для увольнения ");
                     do{
-                    selection = Input.inInt(1, Seller.getSellers_Cntr());
+                    selection = Input.inInt(1, sellers_cntr);
                     }while(selection<0);
 
                     sellers_dismissed.add(sellers[selection-1]);
                     sellers_dismissed_cntr += 1;
 
-                    Seller.fire();
-                    for (int i =selection-1; i<Seller.getSellers_Cntr();i++){
-                        sellers[i]=sellers[i+1];
+                    if (selection == sellers_cntr){ sellers_cntr--;}
+                    else {
+                        for (int i = selection - 1; i < sellers_cntr-1; i++) {
+                            sellers[i] = sellers[i + 1];
+                        }
+                        sellers_cntr--;
                     }
+
                     break;
                 case 6: exit = false; break;
             }
