@@ -3,7 +3,7 @@ package shop;
 import java.util.Scanner;
 
 public class Product {
-    private Producer producer;  //производитель
+    protected Producer producer;  //производитель
     private String Name_Product; // Наименование товара
     private int price; // Цена товара
     private int quantity; // Кол-во товара
@@ -62,7 +62,8 @@ public class Product {
         setQuantity(scanner.nextInt());
     }
 
-    public void outProduct(){
-        System.out.println("Наименование: "+ getName_Product()+"  Цена: "+getPrice() +"  Кол-во: "+getQuantity()+ "  Имя производителя: " +this.producer.getName() + "  Телефон: "+this.producer.getPhone());
+    @Override
+    public String toString() {
+        return "Наименование: "+ getName_Product()+"  Цена: "+getPrice() +"  Кол-во: "+getQuantity()+ "  Имя производителя: " +this.producer.getName() + "  Телефон: "+this.producer.getPhone();
     }
 }

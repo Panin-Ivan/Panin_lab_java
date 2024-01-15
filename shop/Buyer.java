@@ -11,6 +11,11 @@ public class Buyer extends Human {
         buyers_cntr += 1;
     }
 
+    @Override               //переопределение
+    public void setName(String name) {
+        super.setName(name);
+    }
+
     public static int getBuyers_cntr(){return buyers_cntr;};   //счетчик
 
     // Метод ввода информации о покупателе
@@ -25,7 +30,8 @@ public class Buyer extends Human {
     }
 
     // Метод вывода информации о покупателе
-    public void outBuyer() {
-        System.out.println("Покупатель: " + getName() + "  Телефон: " + getPhone());
+    @Override
+    public String toString() {
+        return "Покупатель: " + getName() + "  Телефон: " + getPhone();
     }
 }

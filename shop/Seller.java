@@ -36,8 +36,9 @@ public class Seller extends Human {
     }
 
     // Метод вывода информации о сотруднике
-    public void outSeller(){
-        System.out.println("Продавец: " + getName() + "  Телефон: " +getPhone()+"  Зарплата: "+getSalary()+"  id: "+ id_seller);
+    @Override
+    public String toString() {
+        return "Продавец: " + getName() + "  Телефон: " +getPhone()+"  Зарплата: "+getSalary()+"  id: "+ id_seller;
     }
 
     // Метод ввода информации о сотруднике

@@ -37,8 +37,9 @@ public class Order extends Product {
     public String getName_seller() {return name_seller;}
     public static int getOrders_cntr(){ return orders_cntr;}
 
-    public void outOrder() {       //Вывод заказа
-        System.out.println("id:"+id + "  Дата:" + date + "  Кол-во:" + quantityOrder + "  Статус заказа:" + status +"  Покупатель:"+ name_buyer +"  Продавец:" +name_seller);
+    @Override
+    public String toString() {
+        return"id:"+id + "  Дата:" + date + "  Кол-во:" + quantityOrder + "  Статус заказа:" + status +"  Покупатель:"+ name_buyer +"  Продавец:" +name_seller;
     }
 
     //Добавление заказа по частям
@@ -49,8 +50,8 @@ public class Order extends Product {
         setName_buyer(buyer.getName());
     }
     public void inOrder(Product product){
-        this.getProducer().setName(product.getProducer().getName());
-        this.getProducer().setPhone(product.getProducer().getPhone());
+        producer.setName(product.getProducer().getName());
+        producer.setPhone(product.getProducer().getPhone());
         setName_Product(product.getName_Product());
         setQuantity(product.getQuantity());
         setPrice(product.getPrice());

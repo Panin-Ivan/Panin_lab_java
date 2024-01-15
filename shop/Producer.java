@@ -15,8 +15,9 @@ public class Producer extends Human {
     public static int getProducer_cntr(){return producers_cntr;}   //получение счетчика
 
     // Метод вывода информации о производителе
-    public void outProducer(){
-        System.out.println("Производитель: " + getName() + "  Телефон: " +getPhone());}
+    @Override
+    public String toString() {
+        return "Производитель: " + getName() + "  Телефон: " +getPhone();}
 
     // Метод ввода информации о производителе
     public void inProducer() {

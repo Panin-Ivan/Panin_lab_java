@@ -79,7 +79,7 @@ public class Main {
                                 for(int i=0; i<Producer.getProducer_cntr();i++)
                                 {
                                     System.out.print(i+1+"|");
-                                    producers[i].outProducer();
+                                    System.out.println(producers[i]);
                                 }
 
                                 System.out.print("Выберите производителеля ");
@@ -98,7 +98,7 @@ public class Main {
                                 for(int i=0; i<Product.getProducts_cntr();i++)
                                 {
                                     System.out.print(i+1+"|");
-                                    products[i].outProduct();
+                                    System.out.println(products[i]);
                                 }
                                 System.out.print("Выберите продукт ");
                                 do{
@@ -110,7 +110,7 @@ public class Main {
                                 for(int i=0; i<sellers_cntr;i++)
                                 {
                                     System.out.print(i+1+"|");
-                                    sellers[i].outSeller();
+                                    System.out.println(sellers[i]);
                                 }
                                 System.out.print("Выберите продавца ");
                                 do{
@@ -123,7 +123,7 @@ public class Main {
                                     j = i/5;
                                     k = i%5;
                                     System.out.print(i + 1 + "|");
-                                    buyers[j][k].outBuyer();
+                                    System.out.println(buyers[j][k]);
                                 }
                                 System.out.print("Выберите покупателя ");
                                 do{
@@ -154,13 +154,13 @@ public class Main {
                             case 1: if(Producer.getProducer_cntr()>0) {
                                 for (int i = 0; i < Producer.getProducer_cntr(); i++) {
                                     System.out.print(i+1 + "|");
-                                    producers[i].outProducer();
+                                    System.out.println(producers[i]);
                                 }
                             }else System.out.println("Нет производителей"); break;
                             case 2: if(sellers_cntr>0) {
                                 for (int i = 0; i < sellers_cntr; i++) {
                                     System.out.print(i+1 + "|");
-                                    sellers[i].outSeller();
+                                    System.out.println(sellers[i]);
                                 }
                             }else System.out.println("Нет продавцов"); break;
                             case 3: if(Buyer.getBuyers_cntr()>0) {
@@ -168,31 +168,31 @@ public class Main {
                                         j = i/5;
                                         k = i%5;
                                         System.out.print(i + 1 + "|");
-                                        buyers[j][k].outBuyer();
+                                        System.out.println(buyers[j][k]);
                                     }
                             }else System.out.println("Нет покупателей"); break;
                             case 4: if(Product.getProducts_cntr()>0) {
                                 for (int i = 0; i < Product.getProducts_cntr(); i++) {
                                     System.out.print(i+1 + "|");
-                                    products[i].outProduct();
+                                    System.out.println(products[i]);
                                 }
                             }else System.out.println("Нет товаров"); break;
                             case 5: if(Order.getOrders_cntr()>0) {
                                 for (int i = 0; i < Order.getOrders_cntr(); i++) {
                                     System.out.print(i+1 + "|");
-                                    orders[i].outOrder();
+                                    System.out.println(orders[i]);
                                 }
                             }else System.out.println("Нет заказов"); break;
                             case 6: if(orders_complete_cntr>0) {
                                 for (int i = 0; i < orders_complete_cntr; i++) {
                                     System.out.print(i+1 + "|");
-                                    orders_complete.get(i).outOrder();
+                                    System.out.println(orders_complete.get(i));
                                 }
                             }else System.out.println("Нет выполненных заказов"); break;
                             case 7:if(sellers_dismissed_cntr>0) {
                                 for (int i = 0; i < sellers_dismissed_cntr; i++) {
                                     System.out.print(i+1 + "|");
-                                    sellers_dismissed.get(i).outSeller();
+                                    System.out.println(sellers_dismissed.get(i));
                                 }
                             }else System.out.println("Нет продавцов"); break;
                             case 8: exit1 = false; break;
@@ -203,7 +203,7 @@ public class Main {
                     if(Order.getOrders_cntr()>0) {
                         for (int i = 0; i < Order.getOrders_cntr(); i++) {
                             System.out.print(i+1 + "|");
-                            orders[i].outOrder();
+                            System.out.println(orders[i]);
                         }
                         System.out.print("Выберите номер заказа для посчета суммы ");
                         do{
@@ -217,7 +217,7 @@ public class Main {
                     if(Order.getOrders_cntr()>0) {
                         for (int i = 0; i < Order.getOrders_cntr(); i++) {
                             System.out.print(i+1 + "|");
-                            orders[i].outOrder();
+                            System.out.println(orders[i]);
                         }
                         System.out.print("Выберите номер заказа для выполнения ");
                         do{
@@ -235,7 +235,7 @@ public class Main {
                 case 5:if(sellers_cntr>0) {
                     for (int i = 0; i < sellers_cntr; i++) {
                         System.out.print(i+1 + "|");
-                        sellers[i].outSeller();
+                        System.out.println(sellers[i]);
                     }
                 }else System.out.println("Нет продавцов");
 
