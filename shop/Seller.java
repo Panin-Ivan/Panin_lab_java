@@ -2,7 +2,7 @@ package shop;
 
 import java.util.Scanner;
 
-public class Seller extends Human {
+public class Seller extends Human implements PhoneCall{
     private int salary; // Зарплата
     static int sellers_cntr = 0;    //Счетчик
     private int id_seller;
@@ -40,6 +40,8 @@ public class Seller extends Human {
     public String toString() {
         return "Продавец: " + getName() + "  Телефон: " +getPhone()+"  Зарплата: "+getSalary()+"  id: "+ id_seller;
     }
+
+    public String Call(){ return getPhone();}
 
     // Метод ввода информации о сотруднике
     public void inSeller() {

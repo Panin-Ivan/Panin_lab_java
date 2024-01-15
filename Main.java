@@ -40,10 +40,10 @@ public class Main {
         //меню
         do
         {
-            System.out.println("1.Добавление\n2.Вывод\n3.Сумма заказа\n4.Выполнить заказ\n5.Уволить продавца\n6.Выход");
+            System.out.println("1.Добавление\n2.Вывод\n3.Сумма заказа\n4.Выполнить заказ\n5.Уволить продавца\n6.Звонок\n7.Вывод оплаты\n8.Выход");
 
             do {
-                selection = Input.inInt(1, 6);
+                selection = Input.inInt(1, 8);
             }while(selection<0);
 
             boolean exit1; int j,k;
@@ -256,7 +256,70 @@ public class Main {
                     }
 
                     break;
-                case 6: exit = false; break;
+                case 6:
+                    System.out.println("Выберите кому позвонить");
+                    System.out.println("1.Производитель\n2.Продавец\n3.Покупатель");
+                    do {
+                        selection = Input.inInt(1, 3);
+                    }while(selection<0);
+
+                    switch (selection) {
+                        case 1:
+                            if (Producer.getProducer_cntr() > 0) {
+                                for (int i = 0; i < Producer.getProducer_cntr(); i++) {
+                                    System.out.print(i + 1 + "|");
+                                    System.out.println(producers[i]);
+                                }
+
+                                System.out.println("Введите номер производителя");
+                                do {
+                                    selection = Input.inInt(1, Producer.getProducer_cntr());
+                                }while(selection<0);
+
+                                System.out.println(producers[selection-1].Call());break;
+                            } else System.out.println("Нет производителей");
+                        case 2:
+                            if (sellers_cntr > 0) {
+                                for (int i = 0; i < sellers_cntr; i++) {
+                                    System.out.print(i + 1 + "|");
+                                    System.out.println(sellers[i]);
+                                }
+
+                                System.out.println("Введите номер продавца");
+                                do {
+                                    selection = Input.inInt(1, sellers_cntr);
+                                }while(selection<0);
+
+                                System.out.println(sellers[selection-1].Call());break;
+                            } else System.out.println("Нет продавцов");
+                        case 3:
+                            if (Buyer.getBuyers_cntr() > 0) {
+                                for (int i = 0; i < Buyer.getBuyers_cntr(); i++) {
+                                    j = i / 5;
+                                    k = i % 5;
+                                    System.out.print(i + 1 + "|");
+                                    System.out.println(buyers[j][k]);
+                                }
+
+
+                                System.out.println("Введите номер покупателя");
+                                do {
+                                    selection = Input.inInt(1, Buyer.getBuyers_cntr());
+                                }while(selection<0);
+                                j = (selection-1)/5;
+                                k = (selection-1)%5;
+
+                                System.out.println(buyers[j][k].Call());break;
+                            } else System.out.println("Нет покупателей");
+                    }
+                    break;
+                case 7:
+                    for(int i=0;i < Order.getOrders_cntr();i++){
+                        System.out.println(orders[i].getPayment());
+                    }
+                    break;
+
+                case 8: exit = false; break;
             }
         } while (exit);
     }

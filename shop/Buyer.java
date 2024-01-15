@@ -2,7 +2,7 @@ package shop;
 
 import java.util.Scanner;
 
-public class Buyer extends Human {
+public class Buyer extends Human implements PhoneCall{
     static int buyers_cntr = 0;   //счетчик
     public Buyer(){ buyers_cntr += 1;};  // Конструктор без параметров
 
@@ -29,9 +29,20 @@ public class Buyer extends Human {
         setPhone(scanner.nextLine());
     }
 
+    public String Call(){ return getPhone();}
+
     // Метод вывода информации о покупателе
     @Override
     public String toString() {
         return "Покупатель: " + getName() + "  Телефон: " + getPhone();
+    }
+
+    @Override   //глубовое клонирование
+    protected Object clone() throws CloneNotSupportedException {
+        Buyer buyer = new Buyer();
+        buyers_cntr--;
+        buyer.setName(this.getName());
+        buyer.setPhone(this.getPhone());
+        return buyer;
     }
 }

@@ -2,7 +2,7 @@ package shop;
 
 import java.util.Scanner;
 
-public class Producer extends Human {
+public class Producer extends Human implements PhoneCall, Cloneable{
     static int producers_cntr = 0;   //счетчик
 
     public Producer(){ producers_cntr += 1; };// Конструктор без параметров
@@ -19,6 +19,8 @@ public class Producer extends Human {
     public String toString() {
         return "Производитель: " + getName() + "  Телефон: " +getPhone();}
 
+    public String Call(){ return getPhone();}
+
     // Метод ввода информации о производителе
     public void inProducer() {
         Scanner scanner = new Scanner(System.in);
@@ -28,5 +30,10 @@ public class Producer extends Human {
 
         System.out.print("Введите телефон: ");
         setPhone(scanner.nextLine());
+    }
+
+    @Override //поверхностное клонирование
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

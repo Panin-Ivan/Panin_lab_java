@@ -10,6 +10,7 @@ public class Order extends Product {
     private String name_buyer;      //имя покупателя
     private String name_seller;     //имя продавца
     static int orders_cntr = 0;     //счетчик
+    private Payment<String> payment;    //оплата
 
     public Order(){         // Пустой конструктор
         id = orders_cntr+1;
@@ -36,6 +37,7 @@ public class Order extends Product {
     public String getName_buyer() {return name_buyer;}
     public String getName_seller() {return name_seller;}
     public static int getOrders_cntr(){ return orders_cntr;}
+    public Payment<String> getPayment(){return payment;}
 
     @Override
     public String toString() {
@@ -70,6 +72,11 @@ public class Order extends Product {
         } while (qua > getQuantity());
         setQuantityOrder(qua);
 
+        String id; int sum;
+        System.out.print("Введите id счета: ");
+        id = scanner.nextLine();
+        sum = quantityOrder * getPrice();
+        payment.setPayment(id,sum);
         status = false;
     }
 
