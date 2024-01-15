@@ -40,10 +40,10 @@ public class Main {
         //меню
         do
         {
-            System.out.println("1.Добавление\n2.Вывод\n3.Сумма заказа\n4.Выполнить заказ\n5.Уволить продавца\n6.Звонок\n7.Вывод оплаты\n8.Выход");
+            System.out.println("1.Добавление\n2.Вывод\n3.Сумма заказа\n4.Выполнить заказ\n5.Уволить продавца\n6.Звонок\n7.Вывод оплаты\n8.Контейнер\n9.Выход");
 
             do {
-                selection = Input.inInt(1, 8);
+                selection = Input.inInt(1, 9);
             }while(selection<0);
 
             boolean exit1; int j,k;
@@ -318,8 +318,63 @@ public class Main {
                         System.out.println(orders[i].getPayment());
                     }
                     break;
+                case 8:
+                    do{
+                        System.out.println("1.Сортировка уволенных продавцов по имени\n2.Поиск по имени\n3.Выход к прошлому меню");
+                        System.out.println("Ввыберите действие: ");
+                        do {
+                            selection = Input.inInt(1, 3);
+                        }while(selection<0);
 
-                case 8: exit = false; break;
+                        Seller sel;
+                        switch(selection){
+                            case 1:System.out.println("Сортировать по возрастанию? 1 - да, 2 - нет");
+                                System.out.println("Ввыберите действие: ");
+                                do {
+                                    selection = Input.inInt(1, 2);
+                                }while(selection<0);
+                                if (selection == 1){
+                                    for (int i = 0; i < sellers_dismissed.size()- 1; i++) { //сортировка пузырьком
+                                        for (int e = 0; e < sellers_dismissed.size() - i - 1; e++) {
+                                            if (sellers_dismissed.get(e).getName().compareTo(sellers_dismissed.get(e+1).getName())>0) {
+                                                sel = sellers_dismissed.get(e);
+                                                sellers_dismissed.set(e, sellers_dismissed.get(e+1));
+                                                sellers_dismissed.set(e + 1, sel);
+                                            }
+                                        }
+                                    }
+                                }else{
+                                    for (int i = 0; i < sellers_dismissed.size()- 1; i++) { //сортировка пузырьком
+                                        for (int e = 0; e < sellers_dismissed.size() - i - 1; e++) {
+                                            if (sellers_dismissed.get(e).getName().compareTo(sellers_dismissed.get(e+1).getName())<0) {
+                                                sel = sellers_dismissed.get(e);
+                                                sellers_dismissed.set(e, sellers_dismissed.get(e+1));
+                                                sellers_dismissed.set(e + 1, sel);
+                                            }
+                                        }
+                                    }
+                                }
+                                for (int i = 0; i < sellers_dismissed.size(); i++) {
+                                    System.out.print(i+1 + "|");
+                                    System.out.println(sellers_dismissed.get(i));
+                                }
+                                break;
+                            case 2:
+                                for (int i = 0; i < sellers_dismissed.size(); i++) {
+                                    System.out.print("Введите имя сотрудника: ");
+                                    String name = scanner.nextLine();
+                                    for (int e = 0; i < sellers_dismissed.size(); e++) {
+                                        if (sellers_dismissed.get(e).getName().compareTo(name) == 0) {
+                                            System.out.println(sellers_dismissed.get(e));
+                                        } else System.out.println("Продавец отсутствует");
+                                    }
+                                }
+                                break;
+                            case 3:break;
+                        }
+                    }while(selection !=3);
+                    break;
+                case 9: exit = false; break;
             }
         } while (exit);
     }
